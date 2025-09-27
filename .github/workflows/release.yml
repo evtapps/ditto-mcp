@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Set env
+        run: |
+          VERSION="${GITHUB_REF##refs/*/}"
+          VERSION="${VERSION#v}"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install Dependencies
+        run: yarn --frozen-lockfile
+
+      - name: Build
+        run: yarn build
+
+      - name: Set NPM_TOKEN
+        run: npm config set //registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}
+
+      - name: Publish
+        if: '!github.event.release.prerelease'
+        run: |
+          npm pkg delete scripts.prepare || true
+          npm publish --access public
+
+      - name: Publish release candidate
+        if: 'github.event.release.prerelease'
+        run: |
+          npm pkg delete scripts.prepare || true
+          npm publish --access public --tag=canary

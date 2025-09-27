@@ -1,0 +1,11 @@
+---
+description: Documentation, contributing, code of conduct, and security reporting expectations
+---
+# Documentation & OSS
+
+- README is the single source of truth for install, configuration, usage, and troubleshooting.
+- Update `CHANGELOG.md` and README for user-visible changes.
+- Follow `CONTRIBUTING.md` for PR process, commit style, and release steps.
+- Adhere to the `CODE_OF_CONDUCT.md` in all interactions.
+- Report sensitive security issues privately as described in `SECURITY.md`.
+- Keep examples minimal and copy-pasteable; do not include secrets.

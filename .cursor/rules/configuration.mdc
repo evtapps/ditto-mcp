@@ -1,0 +1,27 @@
+---
+description: Configuration precedence, environment variables, and safe defaults
+---
+# Configuration Guide
+
+## Precedence
+
+- CLI flags > environment variables > defaults.
+
+## Environment Variables
+
+- `DITTO_BASE_URL` – Base URL without `/api/v4` suffix.
+- `DITTO_API_KEY` – Ditto API key; or set a custom name and point `DITTO_API_KEY_ENV` to it.
+- `DITTO_TIMEOUT_MS` – default request timeout.
+- `MCP_DITTO_ALLOWED` – `READ`, `ALL`, or comma-separated: `SELECT,INSERT,UPDATE,DELETE,EVICT`.
+- `MCP_DITTO_QUERY_ALLOW_PATTERNS` – comma/semicolon-separated regexes; all statements must match at least one when provided.
+- `MCP_SERVER_NAME` – display name in MCP clients.
+
+## Safe Defaults
+
+- Default operations: read-only (`SELECT`).
+- Reasonable timeouts and redaction are enabled by default.
+
+## Extending Config
+
+- Add new fields to `ServerConfig` in [`src/config.ts`](mdc:src/config.ts) only.
+- Reflect changes in `ditto://config` resource and README.

@@ -1,0 +1,11 @@
+---
+description: CI/CD expectations, PR checks, and release process
+---
+# CI/CD & Releases
+
+- Build checks run on Node 18/20/22: type-check, lint, format:check, build, pack dry-run.
+- Any PR must pass CI before merge.
+- Release workflow publishes when a GitHub Release is published; uses `NPM_TOKEN` secret.
+- Pre-releases publish under `canary` tag.
+- Dependabot runs monthly for npm, docker, and actions.
+- Do not modify `dist/*` in PRs; it is built on publish.

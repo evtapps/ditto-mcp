@@ -1,0 +1,37 @@
+---
+description: High-level architecture, entrypoints, and module boundaries for the Ditto MCP server
+---
+# Ditto MCP – Architecture Guide
+
+This repository implements an MCP (Model Context Protocol) server that executes Ditto DQL with safety guardrails.
+
+- Entrypoint CLI: [`src/index.ts`](mdc:src/index.ts) creates the server and connects a stdio transport.
+- Server factory: [`src/mcpServer.ts`](mdc:src/mcpServer.ts) registers tools/resources. It is the single place that adds tools to the MCP list.
+- Config: [`src/config.ts`](mdc:src/config.ts) parses environment variables and CLI overrides and returns a typed `ServerConfig`.
+- Ditto HTTP client: [`src/ditto/client.ts`](mdc:src/ditto/client.ts) contains the `executeDql` function.
+- Guardrails: [`src/guards/dql.ts`](mdc:src/guards/dql.ts) enforces single-statement, operation allow-list, and optional regex allow-list.
+- Logging: [`src/utils/logger.ts`](mdc:src/utils/logger.ts) handles leveled logging and redaction.
+
+## Responsibilities and Boundaries
+
+- `src/index.ts`: CLI parsing, process error handling, transport lifecycle, graceful shutdown.
+- `src/mcpServer.ts`: Tool and resource definitions only. No direct env access; uses values passed via `ServerConfig`.
+- `src/config.ts`: Source of truth for allowed operations and timeouts. Only this module reads env variables.
+- `src/ditto/*`: Pure HTTP logic. It returns typed results or a Ditto-style error envelope.
+- `src/guards/*`: Stateless validation/guard code. Server must call before any network I/O.
+- `dist/*`: Generated output. Never edit.
+
+## Transport
+
+- Current transport is stdio. The CLI argument chooses transport string, but server connects stdio by default.
+- HTTP transport can be added later as an orthogonal module; keep `mcpServer.ts` free of transport details.
+
+## Data Flow
+
+- CLI + env → `loadConfig()` → `ServerConfig` → `createServer()` → tool handler → guard functions → Ditto HTTP client → typed response → MCP content.
+
+## Error Handling
+
+- Process-level handlers in `src/index.ts` convert unknown errors to strings safely and exit on `uncaughtException`.
+- Tool handlers return `{ isError: true, content: [...] }` when validation or remote errors occur.
+- HTTP client returns a Ditto-like envelope on failure to simplify tool logic.

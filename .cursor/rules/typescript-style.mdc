@@ -1,0 +1,15 @@
+---
+description: TypeScript code style, naming, typing, and error-handling rules
+---
+# TypeScript Style & Typing Rules
+
+- Prefer `unknown` over `any`. Never cast to `any`. Narrow with type guards.
+- Use `import type { ... }` for types. Keep value/type imports separate.
+- Exported APIs and public functions should have explicit parameter and return types.
+- Prefer early returns and guard clauses; avoid deep nesting.
+- Name functions as verbs; variables and constants as nouns. Avoid abbreviations.
+- Use generics for reusable logic. Avoid over-broad types.
+- Never swallow errors. Convert unknown errors to strings via a helper (see `errorToString` in [`src/index.ts`](mdc:src/index.ts)).
+- Keep modules small and single-responsibility. Cross-module imports should respect boundaries documented in the Architecture Guide.
+- Avoid side effects in modules except the CLI entrypoint.
+- Never log raw secrets; rely on the redacting logger.

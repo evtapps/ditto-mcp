@@ -1,0 +1,11 @@
+---
+description: Manual validation steps and lightweight checks for MCP server behavior
+---
+# Testing & Validation
+
+- Build: `yarn build` must succeed.
+- Lint: `yarn lint:check` and `yarn format:check` must pass.
+- Type-check: `yarn type-check` must pass.
+- MCP Inspector: `npx -y @modelcontextprotocol/inspector npx ditto-mcp-server` to validate tool listing and calls.
+- Smoke test Docker: run container and verify startup logs.
+- For tool behavior, test a safe `SELECT` with dummy args; verify items and error envelope formats.

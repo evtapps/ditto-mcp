@@ -1,0 +1,11 @@
+---
+description: Performance, reliability, and robustness considerations
+---
+# Performance & Reliability
+
+- Keep tool handlers minimal and non-blocking; delegate network I/O to `src/ditto/client.ts`.
+- Avoid large content in responses; return only what the client needs.
+- Use timeouts and request aborts to prevent hanging.
+- Validate early and fail fast (single statement, allowed ops, allow-list).
+- Prefer constant-time checks for policy where feasible.
+- Avoid excessive logging on hot paths.

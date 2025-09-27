@@ -1,0 +1,13 @@
+src
+.github
+.vscode
+**/.DS_Store
+.env*
+*.log
+*.mjs.map
+*.js.map
+tsconfig.json
+yarn.lock
+pnpm-lock.yaml
+package-lock.json
+

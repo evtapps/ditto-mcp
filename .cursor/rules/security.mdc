@@ -1,0 +1,12 @@
+---
+description: Security practices for secrets, gating, network, and logging
+---
+# Security Practices
+
+- Secrets: only via environment variables; avoid CLI args for secrets.
+- Redaction: all logs must pass through the redacting logger; never concatenate secrets into strings that bypass logging APIs.
+- Capability gating: default to read-only (`SELECT`). Allow writes only when explicitly configured.
+- Policy allow-list: prefer enabling only the exact classes of DQL you need.
+- Timeouts: enforce sane HTTP timeouts; abort hanging requests.
+- Never include access tokens or Ditto keys in error messages, resource content, or tool outputs.
+- Keep dependencies minimal and up-to-date; Dependabot covers npm/actions/docker.

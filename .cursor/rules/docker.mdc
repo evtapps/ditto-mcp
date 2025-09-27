@@ -1,0 +1,10 @@
+---
+description: Docker build and run guidance for local testing and client integration
+---
+# Docker
+
+- The provided `Dockerfile` runs the built stdio server (`node dist/index.js stdio`).
+- Build: `docker build -t ditto-mcp .`
+- Run: `docker run --rm -i -e DITTO_BASE_URL -e DITTO_API_KEY ditto-mcp`
+- For MCP clients that support local commands, you can use `docker run --rm -i ... ditto-mcp` as the command and pass secrets via `env`.
+- The image expects `dist/` to be present; always run `yarn build` before building the image.
