@@ -15,6 +15,8 @@ description: Configuration precedence, environment variables, and safe defaults
 - `MCP_DITTO_ALLOWED` – `READ`, `ALL`, or comma-separated: `SELECT,INSERT,UPDATE,DELETE,EVICT`.
 - `MCP_DITTO_QUERY_ALLOW_PATTERNS` – comma/semicolon-separated regexes; all statements must match at least one when provided.
 - `MCP_SERVER_NAME` – display name in MCP clients.
+- `MCP_SERVER_VERSION` – overrides reported version (default: package.json; fallback: `0.0.0-dev`).
+- `LOG_LEVEL` – `debug|info|warn|error|silent`.
 
 ## Safe Defaults
 

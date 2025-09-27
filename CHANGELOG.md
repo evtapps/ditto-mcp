@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.1.3 - 2025-09-27
+
+- Docs/metadata: update GitHub repository, bugs, and homepage links
+
 ## 0.1.2 - 2025-09-27
 
 - Rename npm package to `ditto-mcp-server`; CLI bin remains `ditto-mcp`

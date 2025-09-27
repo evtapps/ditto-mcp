@@ -3,9 +3,10 @@ description: Logging, redaction, and error-handling strategy
 ---
 # Logging & Error Handling
 
-- Always log via the `logger` in [`src/utils/logger.ts`](mdc:src/utils/logger.ts); it redacts Bearer tokens and common secret patterns.
+- Always log via the `logger` in [`src/utils/logger.ts`](mdc:src/utils/logger.ts); it redacts Bearer and Basic auth tokens and common secret patterns.
 - Keep logs concise; prefer single-line entries with structured JSON only when necessary.
 - Do not log secrets or raw Ditto responses containing auth headers.
 - Process handlers must not assume `Error`; convert `unknown` to string safely (`errorToString` in [`src/index.ts`](mdc:src/index.ts)).
 - Tool handlers return errors instead of throwing for expected cases (policy violations, missing config).
 - HTTP client converts failures to Ditto-like envelopes to reduce branching in handlers.
+- Prefer typed errors for HTTP failures (see `HttpStatusError` in [`src/ditto/client.ts`](mdc:src/ditto/client.ts)).

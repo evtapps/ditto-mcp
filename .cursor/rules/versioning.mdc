@@ -3,8 +3,33 @@ description: Versioning discipline and publishing guidance
 ---
 # Versioning & Publishing
 
+## SemVer
+
 - Follow SemVer: breaking changes → major, new features → minor, fixes → patch.
-- Update the hardcoded server version in `createServer()` and `package.json` together.
-- `prepack` builds automatically before publish. Do not publish without a build.
-- Use GitHub Releases to trigger the automated publish pipeline. Pre-releases publish under `canary`.
-- Confirm `npm pack --dry-run` content is minimal (dist + docs only) before releasing.
+
+## Single Source of Truth for Version
+
+- The runtime server version is derived from `package.json` via [`src/utils/version.ts`](mdc:src/utils/version.ts).
+- Override for custom builds: set `MCP_SERVER_VERSION` env. Fallback when unavailable: `0.0.0-dev`.
+- The CLI supports `--version` and reports the same value.
+
+## Build & Pack
+
+- `prepack` builds automatically before publish. Do not publish without a clean build.
+- Confirm `npm pack --dry-run` only includes `dist`, `README.md`, `LICENSE`, `CHANGELOG.md`.
+
+## Releases & Dist-tags
+
+- Pre-releases: publish under the `canary` dist-tag (e.g., `0.1.2-canary.0`).
+- Stable: publish under `latest` (e.g., `0.1.2`).
+- Recommended: use GitHub Releases to trigger the publish pipeline with `NPM_TOKEN`.
+- 2FA accounts: interactive `npm publish` may be required locally (provide OTP).
+
+## Validation
+
+- Verify tags and versions:
+  - `npm view ditto-mcp-server@<version> version`
+  - `npm dist-tag ls ditto-mcp-server`
+- Fresh install smoke test:
+  - `npm i ditto-mcp-server@<tag>` and run `npx ditto-mcp --version`.
+- Inspector E2E: `npx @modelcontextprotocol/inspector npx ditto-mcp-server@<tag>`.
