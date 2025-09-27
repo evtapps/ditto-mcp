@@ -1,6 +1,6 @@
 {
   "name": "ditto-mcp-server",
-  "version": "0.1.2-canary.0",
+  "version": "0.1.2",
   "description": "Model Context Protocol server for Ditto DQL with capability gating",
   "type": "module",
   "bin": {
