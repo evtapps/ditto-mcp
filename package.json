@@ -22,7 +22,7 @@
   "sideEffects": false,
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.18.1",
-    "commander": "^12.1.0",
+    "commander": "^14.0.1",
     "winston": "^3.17.0",
     "zod": "^3.23.8"
   },
