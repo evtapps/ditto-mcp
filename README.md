@@ -47,6 +47,10 @@
 
 An open‑source Model Context Protocol server that executes Ditto DQL over HTTPS with capability gating and safety checks. Designed for Cursor, Claude Code, VS Code Copilot Chat (MCP), Windsurf, Zed, and more.
 
+<a href="https://glama.ai/mcp/servers/@evtapps/ditto-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@evtapps/ditto-mcp/badge" alt="Ditto Server MCP server" />
+</a>
+
 ### Features
 
 - Ping health tool, `execute_dql` tool, and `ditto://config` resource
@@ -78,7 +82,7 @@ npx -y ditto-mcp-server@latest
 
 ## Install in Clients
 
-Below are minimal JSON snippets. See each client’s docs for full syntax and options.
+Below are minimal JSON snippets. See each client's docs for full syntax and options.
 
 ### Cursor
 
@@ -401,7 +405,7 @@ You can also configure Docker as a local MCP command in clients that support run
 
 ## Troubleshooting
 
-- If tools don’t appear, refresh/toggle the server in your client
+- If tools don't appear, refresh/toggle the server in your client
 - Ensure `DITTO_BASE_URL` and `DITTO_API_KEY` are set
 - In Windows, provide full `node` and `dist/index.js` paths if needed
 
@@ -417,4 +421,4 @@ MIT © EVT Engineering and contributors
 
 ---
 
-This project is not affiliated with Ditto. “Ditto” is a respective trademark of its owner.
+This project is not affiliated with Ditto. "Ditto" is a respective trademark of its owner.
